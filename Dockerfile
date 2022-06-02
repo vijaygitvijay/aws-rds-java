@@ -1,7 +1,7 @@
-FROM node:17.3.0-alpine3.14
+FROM maven:3.8.4-openjdk-8-slim AS buils
 RUN mkdir /app
-COPY . /app
+COPY . /cal
 WORKDIR /app
-RUN npm install
-EXPOSE 8080
-CMD ["npm", "start"]
+RUN mvn clean package
+FROM tomcat:9.0-jdk-openjdk
+COPY --from=build /cal/target/LoginWebApp.war /usr/local/tomcat/webapp/javards.war
