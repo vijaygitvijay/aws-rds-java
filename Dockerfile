@@ -4,4 +4,4 @@ WORKDIR /cal
 COPY . /cal
 RUN mvn clean package
 FROM tomcat:9.0
-COPY --from=build /cal/target/LoginWebApp.war /usr/local/tomcat/webapp/javards.war
+COPY --from=build /cal/target/LoginWebApp.war /usr/local/tomcat/webapps/javards.war
